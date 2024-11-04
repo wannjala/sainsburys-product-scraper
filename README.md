@@ -40,6 +40,31 @@ This project consists of four Python scripts working together in sequence:
 ### Data Flow
 Categories API → `meat_fish_categories.json` → `all_products.json` → Detailed Product Data (DB/JSON)
 
+### System Architecture
+
+```mermaid
+flowchart TD
+    subgraph Data Collection Flow
+        A[extract_categories.py] -->|Generates| B[meat_fish_categories.json]
+        B -->|Input for| C[extract_products.py]
+        C -->|Generates| D[all_products.json]
+        D -->|Input for| E1[extract_product_details_db.py]
+        D -->|Input for| E2[extract_product_details_json.py]
+    end
+
+    subgraph Storage Options
+        E1 -->|Stores in| F1[(SQLite Database)]
+        E2 -->|Stores in| F2[processed_products.json]
+    end
+
+    subgraph Key Features
+        G1[Pagination Handling]
+        G2[Rate Limiting]
+        G3[Error Recovery]
+        G4[Progress Tracking]
+        G5[Data Cleaning]
+    end
+
 ## Final Thoughts
 
 This project was incredibly enriching, although it took many days of trial and error to get right. The journey taught me several valuable lessons in web scraping and API interaction:
