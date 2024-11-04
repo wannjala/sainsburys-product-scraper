@@ -64,6 +64,7 @@ flowchart TD
         G4[Progress Tracking]
         G5[Data Cleaning]
     end
+```
 
 ## Final Thoughts
 
